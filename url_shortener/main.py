@@ -3,6 +3,7 @@ from cleanapi import CleanAPI
 from fastapi import FastAPI, Response, status
 from prometheus_fastapi_instrumentator import Instrumentator
 from metrics.cpu_mem_usage_metric import cpu_mem_usage_metric
+from metrics.request_total_count_metric import request_total_count_metric
 from metrics.request_status_code_metric import request_status_code_metric
 
 # Determine version of the api.
@@ -19,6 +20,7 @@ clean_api = CleanAPI()
 instrumentator = Instrumentator()
 instrumentator.add(cpu_mem_usage_metric())
 instrumentator.add(request_status_code_metric())
+instrumentator.add(request_total_count_metric())
 instrumentator.instrument(app).expose(app)
 
 

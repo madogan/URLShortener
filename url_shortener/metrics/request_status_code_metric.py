@@ -1,17 +1,20 @@
-import json
-
 from typing import Callable
-from prometheus_client import Gauge
+from prometheus_client import Counter
 from prometheus_fastapi_instrumentator.metrics import Info
 
 
 def request_status_code_metric() -> Callable[[Info], None]:
-    METRIC = Gauge('request_status_code_metric', 'Distribution of status codes.')
-
+    metrics = {
+        200: Counter('requsts_status_code_200', 'Distribution of status code 200'),
+        400: Counter('requsts_status_code_400', 'Distribution of status code 400'),
+        404: Counter('requsts_status_code_404', 'Distribution of status code 404'),
+        405: Counter('requsts_status_code_405', 'Distribution of status code 405'),
+    }
+    
     def instrumentation(info: Info) -> None:
         if info.response:
-            METRIC.set(info.response.status_code)
+            metrics[info.response.status_code].inc()
         else:
-            METRIC.set(404)
+            metrics[404].inc()
 
     return instrumentation

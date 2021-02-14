@@ -4,7 +4,7 @@ import requests as req
 class CleanAPI:
     """Class for manage clean api requests."""
 
-    BASE_URL = "https://22cleanuri.com/api/v1/shorten"
+    BASE_URL = "https://cleanuri.com/api/v1/shorten"
 
     def shorten(self, url: str) -> dict:
         """Request to cleanapi to shorten given url.
