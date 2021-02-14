@@ -1,0 +1,36 @@
+version: '3.0'
+
+networks:
+  monitoring-net:
+
+volumes:
+  app-data:
+  prometheus-data:
+
+services:
+  url_shortener:
+    build: ./url_shortener
+    image: url_shortener:1.0
+    container_name: url_shortener
+    restart: unless-stopped
+    networks:
+      - monitoring-net
+    ports:
+      - "8000:8000"
+  prometheus:
+    image: prom/prometheus:v2.21.0
+    ports:
+      - 9000:9090
+    volumes:
+      - ./prometheus:/etc/prometheus
+      - prometheus-data:/prometheus
+    command: --web.enable-lifecycle  --config.file=/etc/prometheus/prometheus.yml
+    networks:
+      - monitoring-net
+  grafana:
+    image: grafana/grafana:5.1.0
+    ports:
+      - 3000:3000
+    user: "104"
+    networks:
+      - monitoring-net
