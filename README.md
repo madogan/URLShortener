@@ -130,7 +130,7 @@ groups:
 Look at `http://localhost:3000` to see Grafana dashboard.
 
 ### Cpu and Mem Usage:
-<img src=“https://github.com/madogan/URLShortener/blob/master/cpu_mem_graph.png?raw=true”>
+![CPU&MEM](https://github.com/madogan/URLShortener/blob/master/cpu_mem_graph.png?raw=true)
 
 ### Request Stats:
-<img src=“https://github.com/madogan/URLShortener/blob/master/request_stats_graph.png?raw=true”>
+![REQUEST_STATS](https://github.com/madogan/URLShortener/blob/master/request_stats_graph.png?raw=true)
